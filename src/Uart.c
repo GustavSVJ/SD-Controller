@@ -3,12 +3,12 @@
 /****************************/
 /*** USB Serial Functions ***/
 /****************************/
-void uart_putc(uint8_t c) {
+void uart2_putc(uint8_t c) {
     USART_SendData(USART2, (uint8_t)c);
     while(USART_GetFlagStatus(USART2, USART_FLAG_TXE)  == RESET){}
 }
 
-uint8_t uart_getc() {
+uint8_t uart2_getc() {
     while(USART_GetFlagStatus(USART2, USART_FLAG_RXNE) == RESET){};
     uint8_t c = (uint8_t)USART_ReceiveData(USART2);
 
@@ -30,7 +30,7 @@ int _write_r(struct _reent *r, int file, char *ptr, int len) {
     return len;
 }
 
-void init_usb_uart(uint32_t baud) {
+void uart2_init(uint32_t baud) {
     setbuf(stdout, NULL); // Set stdout to disable line buffering
     setbuf(stdin,  NULL); // Set stdin  to disable line buffering
 
