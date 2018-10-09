@@ -137,7 +137,7 @@ void uart1_init(uint32_t baud) {
     uint32_t divider = 0, apbclock = 0, tmpreg = 0;
     RCC_ClocksTypeDef RCC_ClocksStatus;
     RCC_GetClocksFreq(&RCC_ClocksStatus); // Get USART2 Clock frequency
-    apbclock = RCC_ClocksStatus.USART1CLK_Frequency;
+    apbclock = RCC_ClocksStatus.USART2CLK_Frequency;
 
     if ((USART1->CR1 & 0x00008000) != 0) {
       // (divider * 10) computing in case Oversampling mode is 8 Samples
@@ -162,4 +162,11 @@ void uart1_init(uint32_t baud) {
 
     USART1->BRR = (uint16_t)divider; // Configure baud rate
     USART1->CR1 |= 0x00000001; // Enable USART2
+}
+
+void uart1_putstr(uint8_t str[]){
+    for(uint8_t i = 0; str[i] != 0; i++){
+        uart1_putc(str[i]);
+    }
+
 }

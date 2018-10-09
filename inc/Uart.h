@@ -21,6 +21,7 @@ void uart2_init(uint32_t baud);
 void uart1_putc(uint8_t c);
 uint8_t uart1_getc();
 void uart1_init(uint32_t baud);
+void uart1_putstr(uint8_t str[]);
 
 
 
